@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<!-- Website Template by freewebsitetemplates.com -->
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Boob</title>
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+<body>
+<div id="header">
+    <div class="section">
+        <div class="logo">
+            <a href="index.html">Bob</a>
+        </div>
+        <ul>
+            <li class="selected">
+                <a href="homepage">Home</a>
+            </li>
+            <li>
+                <a href="newtag">New tag</a>
+            </li>
+            <li>
+                <a href="taglist">Tag</a>
+            </li>
+            <li>
+                <a href="login">Login</a>
+            </li>
+            <li>
+                <a href="register">Register</a>
+            </li>
+        </ul>
+    </div>
+</div>
+<div id="body">
+    {% for tag in tags %}
+        <li>{{ tag.address}} -- Addresse </li>
+        <li>{{ tag.postalCode }} -- Code Postal</li>
+        <li>{{ tag.city }} -- Ville</li>
+        <li>{{ tag.orientation }} -- Orientation</li>
+        <li>{{ tag.pathPicture }} -- Image</li>
+    {% endfor %}
+</div>
+<div id="footer">
+    <div>
+        <p>
+            &copy; copyright 2019 | all rights reserved.
+        </p>
+    </div>
+</div>
+</body>
+</html>
