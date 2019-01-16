@@ -1,0 +1,25 @@
+# config/routes.yaml
+
+# the "app_lucky_number" route name is not important yet
+app_Home_Page:
+  path: /
+  controller: App\Controller\HomePageController::homepage
+register:
+  path: /register
+  controller: App\Controller\UserController::register
+login:
+  path: /login
+  controller: App\Controller\UserController::login
+new_tag:
+  path: /newTag
+  controller: App\Controller\TagController::newtag
+tag_page:
+  path: /tagpage
+  controller: App\Controller\TagController::show
+tag_list:
+  path: /taglist
+  controller: App\Controller\TagController::list
+dashboard:
+  path: /home
+  controller: App\Controller\UserController::dashboard
+
