@@ -4,8 +4,12 @@
     {% block body %}
         {<div id="body">
         {{ form_start(form) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.password) }}
+        {{ form_row(form.id_building) }}
+
+        {{ form_row(form.orientation) }}
+        {{ form_row(form.floor) }}
+        {{ form_row(form.description) }}
+
         <button type="submit">Envoyer!</button>
     </div>
     {% endblock %}

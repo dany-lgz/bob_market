@@ -4,8 +4,12 @@
     {% block body %}
         {<div id="body">
         {{ form_start(form) }}
-        {{ form_row(form.email) }}
-        {{ form_row(form.password) }}
+        {{ form_row(form.id_ticket) }}
+        {{ form_row(form.id_building) }}
+        {{ form_row(form.adress) }}
+        {{ form_row(form.floor) }}
+
+
         <button type="submit">Envoyer!</button>
     </div>
     {% endblock %}

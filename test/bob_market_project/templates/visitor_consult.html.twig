@@ -1,10 +1,23 @@
 {% extends "base.html.twig" %}
 
 
+
     {% block body %}
-        <div id="body">
-            {% for tag in ticket %}
-                <li>{{ tag.email}} -- Addresse </li>
-            {% endfor %}
-        </div>
+        <li class="list-inline-item">
+        {% for tag in ticket %}
+            <li>Id : {{ tag.getId}}</li>
+            <li>Id ticket: {{ tag.getIdTicket}}</li>
+            <li>Id utilisateur: {{ tag.getIdUser }}</li>
+            <li>Vérifié ou non {{ tag.getChecked }}</li>
+            <li>Validé ou non {{ tag.getValidated  }}</li>
+            <li>Date de validation {{ tag.getDateValid |date('Y-m-d')}}</li>
+            <li>Justification de refus{{ tag.getTextInvalid }}</li>
+            <li>Travaux prévus {{ tag.getDone }}</li>
+            <li>Date de vérification {{ tag.getDateChecked |date('Y-m-d') }}</li>
+            <li>Prix de le préstation{{ tag.getPriceValid }}</li>
+            <br>
+            <br>
+            <br>
+        {% endfor %}
+        </li>
     {% endblock %}

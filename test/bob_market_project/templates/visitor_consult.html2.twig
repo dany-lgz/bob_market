@@ -2,11 +2,17 @@
 
 
     {% block body %}
+        {{ form_start(form) }}
+        {{ form_row(form.id_ticket) }}
+        <button type="submit">Envoyer!</button>
+    {% endblock %}
+
+            {% block bod %}
         <li class="list-inline-item">
-        {% for tag in ticket %}
-            <li>Id : {{ tag.getId}}</li>
-            <li>Id ticket: {{ tag.getIdTicket}}</li>
-            <li>Id utilisateur: {{ tag.getIdUser }}</li>
+        {% for tag in form %}
+            <h1>Id : {{ tag.getId}}</h1>
+            <h1>Id ticket: {{ tag.getIdTicket}}</h1>
+            <h1>Id utilisateur: {{ tag.getIdUser }}</h1>
             <li>Vérifié ou non {{ tag.getChecked }}</li>
             <li>Validé ou non {{ tag.getValidated  }}</li>
             <li>Date de validation {{ tag.getDateValid |date('Y-m-d')}}</li>

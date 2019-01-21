@@ -2,5 +2,14 @@
 
 
     {% block body %}
-user_accept
+        {<div id="body">
+        {{ form_start(form) }}
+        {{ form_row(form.id_ticket) }}
+        {{ form_row(form.id_user) }}
+        {{ form_row(form.checked) }}
+        {{ form_row(form.validated) }}
+        <button type="submit">Envoyer!</button>
+        {{ form_end(form) }}
+    </div>
+
     {% endblock %}
