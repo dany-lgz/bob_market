@@ -8,6 +8,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "sensio/framework-extra-bundle": "^5.2",
+        "symfony/asset": "4.2.*",
         "symfony/console": "*",
         "symfony/dotenv": "*",
         "symfony/flex": "^1.1",
@@ -15,6 +16,7 @@
         "symfony/http-foundation": "4.2.*",
         "symfony/maker-bundle": "^1.11",
         "symfony/orm-pack": "^1.0",
+        "symfony/twig-bundle": "4.2.*",
         "symfony/web-server-bundle": "^4.2",
         "symfony/yaml": "*"
     },

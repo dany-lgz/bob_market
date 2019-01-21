@@ -25,21 +25,27 @@ class TicketController extends AbstractController
      */
     public function ticket_create()
     {
-        return $this->json([
-            'message' => 'Welcome to your ticket_create!',
-            'path' => 'src/Controller/TicketController.php',
-        ]);
+        $entityManager = $this->getDoctrine()->getManager();
+
+        $ticket = new Ticket();
+        $ticket->setIdTicket(3);
+        $ticket->setIdUser(3);
+        $ticket->setChecked(true);
+        $ticket->setValidated(true);
+        $entityManager->persist($ticket);
+        $entityManager->flush();
+        return new Response('ticket new user with id '.$ticket->getId());
     }
 
     /**
-     * @Route("/ticket/get", name="ticket_get")
+     * @Route("/ticket/get/{id}", name="ticket_get")
      */
-    public function ticket_get()
+    public function ticket_get($id)
     {
-        return $this->json([
-            'message' => 'Welcome to ticket_get!',
-            'path' => 'src/Controller/TicketController.php',
-        ]);
+        $ticket = $this->getDoctrine($id)->getRepository(Ticket::class)->find($id);
+        if (!$ticket)
+            throw $this->createNotFoundException('No ticket found for id '.$id);
+        return new Response($ticket->getId());
     }
 
     /**
@@ -47,10 +53,7 @@ class TicketController extends AbstractController
      */
     public function ticket_update()
     {
-        return $this->json([
-            'message' => 'Welcome to ticket_update!',
-            'path' => 'src/Controller/TicketController.php',
-        ]);
+        return $this->render('base.html.twig');
     }
 
     /**
