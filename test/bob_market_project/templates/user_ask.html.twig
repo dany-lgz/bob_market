@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+
+    {% block body %}
+            <form method="post" action="{{path('user/ask')}}" class="home-form">
+            <h2 class="form-signin-heading">Connection</h2>
+            <label for="inputAddressMail" class="sr-only">AddressMail</label><input type="text" id="inputAddressMail" name="_mail" class="form-control" placeholder="validated" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label><input type="password" id="inputPassword" name="_password" class="form-control" placeholder="checked" required>
+            <label for="inputAddressMail" class="sr-only">AddressMail</label><input type="text" id="inputAddressMail" name="_mail" class="form-control" placeholder="id_user" required>
+            <label for="inputPassword" class="sr-only">Password</label><input type="password" id="inputPassword" name="_password" class="form-control" placeholder="id_ticket" required>
+
+            <input type="hidden" name="_target_path" value="dashboard" /><button class="btn btn-lg btn-primary btn-block" type="submit"> Envoyer la demande</button>
+        </form>
+    {% endblock %}

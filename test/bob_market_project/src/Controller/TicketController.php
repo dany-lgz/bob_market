@@ -61,10 +61,7 @@ class TicketController extends AbstractController
      */
     public function ticket_delete()
     {
-        return $this->json([
-            'message' => 'Welcome to ticket_delete!',
-            'path' => 'src/Controller/TicketController.php',
-        ]);
+        return $this->render('register.html.twig');
     }
 
     /**
@@ -77,4 +74,87 @@ class TicketController extends AbstractController
             'path' => 'src/Controller/TicketController.php',
         ]);
     }
+
+    //VISITOR////////////////
+
+    /**
+     * @Route("/visitor/consult", name="visitor_consult")
+     */
+    public function visitor_consult()
+    {
+        $ticket = $this->getDoctrine()->getRepository(Ticket::class)->findAll();
+        if (!$ticket)
+            throw $this->createNotFoundException('Not found');
+        return $this->render(
+            'visitor_consult.html.twig',
+            [ 'ticket'=> $ticket ]
+        );
+        return $this->render('visitor_consult.html.twig');
+    }
+
+
+    //USER///////////
+    /**
+     * @Route("/user/consult", name="user_consult")
+     */
+    public function user_consult()
+    {
+        return $this->render('user_consult.html.twig');
+    }
+
+    /**
+     * @Route("/user/ask", name="user_ask")
+     */
+    public function user_ask()
+    {
+        return $this->render('user_ask.html.twig');
+    }
+
+
+    /**
+     * @Route("/user/askagain", name="user_askagain")
+     */
+    public function user_askagain()
+    {
+        return $this->render('user_askagain.html.twig');
+    }
+
+
+    /**
+     * @Route("/user/accept", name="user_accept")
+     */
+    public function user_accept()
+    {
+        return $this->render('user_accept.html.twig');
+    }
+
+
+    /**
+     * @Route("/user/refuse", name="user_refuse")
+     */
+    public function user_refuse()
+    {
+        return $this->render('user_refuse.html.twig');
+    }
+
+    //BOB/////////////
+
+
+    /**
+     * @Route("/bob/accept", name="bob_accept")
+     */
+    public function bob_accept()
+    {
+        return $this->render('bob_accept.html.twig');
+    }
+
+
+    /**
+     * @Route("/bob/refuse", name="bob_refuse")
+     */
+    public function bob_refuse()
+    {
+        return $this->render('bob_refuse.html.twig');
+    }
+
 }

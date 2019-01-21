@@ -1,24 +1,18 @@
 <!DOCTYPE html>
-<html>
+
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>
-        {% block title %}
-            Bob Market: Gestion de vos grafity.
-        {% endblock %}
-        {% block link %}<!-- Latest compiled and minified CSS -->
+    <meta charset="utf-8">
+    <title>Accueil - SmartBag</title>
 
-
-
-
-
+    <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
     <!-- jQuery library -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <!-- Latest compiled JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Google fonts-->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
@@ -27,47 +21,207 @@
     <!-- Font Awesome-->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 
-        {% endblock %}
-    </title>
+    <!-- Leaflet Map-->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA==" crossorigin=""/>
+
+    <!-- Custom styles for this page -->
+    <style>
+        /*Footer CSS*/
+
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content/Box */
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto; /* 15% from the top and centered */
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+        }
+
+        /* The Close Button */
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .footer {
+            font-family: 'Montserrat', serif;
+            background-color: #236870;
+            padding-top: 5rem;
+            padding-bottom: 5rem;
+            border-top: 5px;
+            border-left: 0px;
+            border-right: 0px;
+            border-bottom: 0px;
+            border-style: solid;
+            border-color: #2fe0b1;
+        }
+
+        .map-modal-link {
+            color: white !important;
+        }
+
+        .footer a:hover {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .modal-backdrop {
+            z-index: 0 !important;
+        }
+
+        .close {
+            color: black;
+        }
+
+        .close:hover {
+            color: red;
+        }
+
+        .modal-header, .modal-title {
+            font-family: 'Montserrat', serif;
+            font-weight: bold !important;
+        }
+
+        .text-content {
+            color: white;
+        }
+
+        .title-content {
+            font-weight: bold;
+            font-size: x-large;
+        }
+
+        .copyright {
+            background-color: #19484d;
+            min-height: 60px;
+            font-weight: bold;
+            color: white;
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .copyright-mention {
+            font-family: 'Montserrat', serif;
+        }
+
+        .btn-outline-light:hover {
+            color: white;
+            background-color: #2fe0b1;
+            border-color: #f8f9fa;
+            opacity: 0.9;
+            z-index: -1;
+        }
+    </style>
 </head>
 
-<div class="container">
-    <div class="row">
-        <div class="col-md-4 mb-5 mb-lg-0 text-content">
-            <h4 class="text-uppercase mb-4 title-content">Adresse</h4>
-            <a class="lead mb-0 content map-modal-link" data-toggle="modal" data-target="#team-location-modal">66 Rue Guy Môquet
-                <br>94800 Villejuif</a>
-        </div>
-        <div class="col-md-4 mb-5 mb-lg-0 text-content">
-            <h4 class="text-uppercase mb-4 title-content">Autour du web</h4>
-            <ul class="list-inline mb-0">
-                <li class="list-inline-item">
+<body>
+<!-- Footer -->
+<footer class="footer text-center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 mb-5 mb-lg-0 text-content">
+                <h4 class="text-uppercase mb-4 title-content">Adresse</h4>
+                <a class="lead mb-0 content map-modal-link" data-toggle="modal" data-target="#team-location-modal">66 Rue Guy Môquet
+                    <br>94800 Villejuif</a>
+            </div>
+            <div class="col-md-4 mb-5 mb-lg-0 text-content">
+                <h4 class="text-uppercase mb-4 title-content">Autour du web</h4>
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
 
-                    <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                        <i class="fab fa-2x fa-facebook-f"></i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                        <i class="fab fa-2x fa-google-plus-g"></i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#" >
-                        <i class="fab fa-2x fa-twitter"></i>
-                    </a>
-                </li>
-                <li class="list-inline-item">
-                    <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
-                        <
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-4 text-content">
-            <h4 class="text-uppercase mb-4 title-content">A propos de SmartBag</h4>
-            <p class="lead mb-0 content">SmartBag est un petit projet créé par
-                <a href="https://sigl.epita.fr/">l'équipe Bilbao</a>  de la promotion SIGL 2019.</p>
+                        <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                            <i class="fab fa-2x fa-facebook-f"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                            <i class="fab fa-2x fa-google-plus-g"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#" >
+                            <i class="fab fa-2x fa-twitter"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                            <i class="fab fa-2x fa-linkedin-in"></i>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <a class="btn btn-outline-light btn-social text-center rounded-circle" href="#">
+                            <i class="fab fa-2x fa-instagram"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-4 text-content">
+                <h4 class="text-uppercase mb-4 title-content">A propos de SmartBag</h4>
+                <p class="lead mb-0 content">SmartBag est un petit projet créé par
+                    <a href="http://startbootstrap.com">l'équipe Bilbao</a>  de la promotion SIGL 2019.</p>
+            </div>
         </div>
     </div>
+</footer>
+
+<div class="copyright">
+    <div class="container copyright-mention">
+        <small>Copyright &copy; Smartbag.fr 2018</small>
+    </div>
 </div>
-</html>
+
+<div class="modal fade" id="team-location-modal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Nos locaux</h4>
+            </div>
+            <div class="modal-body">
+                <div id="mapid" style="width:400px;height:400px"></div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.3.4/dist/leaflet.js" integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA==" crossorigin=""></script>
+
+<script type="text/javascript">
+    var coordinates = [48.797750, 2.357840];
+    var mymap = L.map('mapid').setView(coordinates, 17);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoiZ2hvcGUiLCJhIjoiY2ptZjNsZGh3MGRkMzN4cnNnNmJqZHZpYSJ9.77niLhuev1V-O_-DPtrkNg', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 20,
+        id: 'mapbox.streets',
+        accessToken: 'your.mapbox.access.token'
+    }).addTo(mymap);
+
+    var marker = L.marker(coordinates).addTo(mymap);
+    marker.bindPopup("<b>EPITA!</b><br>Les meilleurs ingénieurs du moment!").openPopup();
+</script>
+</body>
