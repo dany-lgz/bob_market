@@ -3,7 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Ticket;
+use Symfony\Component\Form;
+use App\Form\TicketFormType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -105,9 +108,30 @@ class TicketController extends AbstractController
     /**
      * @Route("/user/ask", name="user_ask")
      */
-    public function user_ask()
+    public function user_ask(Request $request)
     {
-        return $this->render('user_ask.html.twig');
+        $ticket = new Ticket();
+        $form = $this->createForm(TicketFormType::class, $ticket);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($ticket);
+            $entityManager->flush();
+            return $this->json([
+                'message' => 'INVALIDer!',
+                'path' => 'src/Controller/TicketController.php',
+            ]);
+           // return $this->redirectToRoute('header_user');
+        }
+        else
+
+
+        return $this->render(
+            'user_ask.html.twig',
+            array('form' => $form->createView())
+        );
+
     }
 
 
